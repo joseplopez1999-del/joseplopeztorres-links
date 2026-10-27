@@ -1,15 +1,15 @@
 # Links OS Project
 
-Una "link in bio" que se toca: un piano donde cada tecla suena y te lleva a uno de mis enlaces.
+Una "link in bio" que se toca: el interior de un piano de cola donde cada cuerda es uno de mis enlaces.
 
 ## Qué hace este proyecto
 
-`links-os-project` es una landing interactiva construida con React + TypeScript + Vite que convierte la "link in bio" en un piano:
+`links-os-project` es una landing interactiva construida con React + TypeScript + Vite que convierte la "link in bio" en las cuerdas de un piano:
 
-- Home convertida en un piano: cada tecla blanca es un link y suena al tocarla (Web Audio, sin samples).
-- En móvil el teclado va girado 90° (teclas en filas); en escritorio vuelve a estar en horizontal.
-- Primer toque = suena y se selecciona; segundo toque = abre. Deslizar el dedo hace un glissando.
-- Las teclas negras solo suenan. Hay un pentagrama que escribe lo que tocas (y un easter egg si tocas *Para Elisa*).
+- Cada link es una cuerda: graves de cobre entorchado, agudas de acero en grupos de 2 y 3, como en un piano de cola.
+- Arrastrar el dedo agarra la cuerda, la tensa y la suelta; rasgar varias hace un glissando. Un toque en el nombre abre el link.
+- Sonido por síntesis de cuerda pulsada (Karplus-Strong) y vibración visual con la física real de la cuerda, a cámara lenta.
+- Resonancia simpática entre octavas, apagadores de fieltro para silenciar y teclado del ordenador (1–9, espacio).
 - Formularios propios para proyecto, newsletter y contacto.
 - Suscripción a newsletter mediante endpoint seguro (`/api/subscribe`) con validaciones, límite de peticiones y protección básica anti abuso.
 - Integración con Sentry y Vercel Analytics.
@@ -103,11 +103,11 @@ Flujo recomendado:
 
 Si quieres reutilizar este proyecto para tu marca personal:
 
-- Cambia las teclas/links en `src/config/links.ts` (perfiles en `src/config/socialLinks.ts`).
-- El rango de notas del teclado está en `src/lib/notes.ts` (una tecla blanca por link).
+- Cambia los links en `src/config/links.ts` (perfiles en `src/config/socialLinks.ts`).
+- Afinación, material y grosor de cada cuerda en `src/components/strings/StringsLinks.tsx` (una cuerda por link).
 - Sustituye iconos e imágenes en `public/`.
-- Ajusta textos y cabecera en `src/components/piano/PianoLinks.tsx`.
-- Personaliza estilos y paleta en `src/index.css` (sección *Piano links*).
+- La física del sonido y de la vibración está en `src/lib/stringPhysics.ts` (con tests).
+- Personaliza estilos y paleta en `src/index.css` (sección *Cuerdas*).
 
 ## Seguridad y privacidad
 

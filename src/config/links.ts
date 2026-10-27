@@ -10,8 +10,8 @@ export type PianoLink = {
 } & ({ href: string; action?: never } | { action: LinkAction; href?: never });
 
 /**
- * Una tecla blanca por link, de arriba (Do grave) a abajo (Re agudo).
- * Si añades o quitas uno, ajusta el rango en `lib/notes.ts`.
+ * Una cuerda por link, de arriba (grave) a abajo (agudo).
+ * Si añades o quitas uno, ajusta `STRINGS` en `components/strings/StringsLinks.tsx`.
  */
 export const PIANO_LINKS: PianoLink[] = [
   { id: 'web', label: 'Web', detail: 'joseplopeztorres.com', href: 'https://joseplopeztorres.com' },

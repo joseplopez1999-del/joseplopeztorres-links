@@ -58,7 +58,7 @@ export default function NewsletterScreen({ onClose }: Props) {
       className="absolute inset-0 z-[150] flex items-end justify-center rounded-[34px] bg-black/60 backdrop-blur-md"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="max-h-[90%] w-full overflow-y-auto rounded-t-[32px] bg-gradient-to-b from-[#13131f] to-[#0a0a0f] px-6 pb-10 pt-5 shadow-[0_-8px_48px_rgba(0,0,0,0.7)]">
+      <div className="max-h-[90%] w-full overflow-y-auto rounded-t-[32px] bg-gradient-to-b from-[#1c140d] to-[#0b0806] px-6 pb-10 pt-5 shadow-[0_-8px_48px_rgba(0,0,0,0.7)]">
         <div className="mb-5 flex items-center justify-between">
           <div className="h-1 w-10 rounded-full bg-white/20" />
           <button
@@ -75,7 +75,7 @@ export default function NewsletterScreen({ onClose }: Props) {
 
         {step === 'form' && (
           <>
-            <p className="mb-1 font-sans text-[10px] font-semibold uppercase tracking-widest text-[#a78bfa]/60">
+            <p className="mb-1 font-sans text-[10px] font-semibold uppercase tracking-widest text-[#c9824a]/60">
               Lista de espera
             </p>
             <h2 className="mb-1 font-sans text-xl font-bold text-white">Cuéntame un poco</h2>
@@ -91,7 +91,7 @@ export default function NewsletterScreen({ onClose }: Props) {
                 placeholder="tu@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#a78bfa]/60 focus:bg-white/[0.07]"
+                className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#c9824a]/60 focus:bg-white/[0.07]"
               />
 
               {/* ¿Dónde me conociste? */}
@@ -107,8 +107,8 @@ export default function NewsletterScreen({ onClose }: Props) {
                       onClick={() => setSource(opt)}
                       className={`rounded-full px-3 py-1.5 font-sans text-xs font-medium transition-colors ${
                         source === opt
-                          ? 'bg-[#a78bfa] text-[#0d0d14]'
-                          : 'border border-white/10 bg-white/5 text-white/60 hover:border-[#a78bfa]/40'
+                          ? 'bg-[#c9824a] text-[#120c07]'
+                          : 'border border-white/10 bg-white/5 text-white/60 hover:border-[#c9824a]/40'
                       }`}
                     >
                       {opt}
@@ -127,7 +127,7 @@ export default function NewsletterScreen({ onClose }: Props) {
                   placeholder="Valencia, Madrid, México..."
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#a78bfa]/60 focus:bg-white/[0.07]"
+                  className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#c9824a]/60 focus:bg-white/[0.07]"
                 />
               </div>
 
@@ -141,7 +141,7 @@ export default function NewsletterScreen({ onClose }: Props) {
                   placeholder="Desarrollador, músico, emprendedor..."
                   value={occupation}
                   onChange={(e) => setOccupation(e.target.value)}
-                  className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#a78bfa]/60 focus:bg-white/[0.07]"
+                  className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#c9824a]/60 focus:bg-white/[0.07]"
                 />
               </div>
 
@@ -155,14 +155,14 @@ export default function NewsletterScreen({ onClose }: Props) {
                   value={about}
                   onChange={(e) => setAbout(e.target.value)}
                   rows={2}
-                  className="w-full resize-none rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#a78bfa]/60 focus:bg-white/[0.07]"
+                  className="w-full resize-none rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#c9824a]/60 focus:bg-white/[0.07]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading || !email}
-                className="w-full rounded-2xl bg-[#a78bfa] py-3 font-sans text-sm font-semibold text-[#0d0d14] shadow-[0_0_24px_rgba(167,139,250,0.35)] transition-all duration-200 hover:shadow-[0_0_32px_rgba(167,139,250,0.55)] active:scale-[0.98] disabled:opacity-40 disabled:shadow-none"
+                className="w-full rounded-2xl bg-[#c9824a] py-3 font-sans text-sm font-semibold text-[#120c07] shadow-[0_0_24px_rgba(201,130,74,0.35)] transition-all duration-200 hover:shadow-[0_0_32px_rgba(201,130,74,0.55)] active:scale-[0.98] disabled:opacity-40 disabled:shadow-none"
               >
                 {loading ? 'Enviando...' : 'Apúntame'}
               </button>
@@ -178,7 +178,7 @@ export default function NewsletterScreen({ onClose }: Props) {
               Te escribo cuando haya algo que merezca tu atención.
             </p>
             <button type="button" onClick={onClose}
-              className="font-sans text-sm font-medium text-[#a78bfa]">
+              className="font-sans text-sm font-medium text-[#c9824a]">
               Cerrar
             </button>
           </div>
@@ -190,7 +190,7 @@ export default function NewsletterScreen({ onClose }: Props) {
             <h2 className="mb-1 font-sans text-xl font-bold text-white">Algo falló.</h2>
             <p className="mb-4 font-sans text-xs text-white/40">{errorMsg}</p>
             <button type="button" onClick={() => setStep('form')}
-              className="font-sans text-sm font-medium text-[#a78bfa]">
+              className="font-sans text-sm font-medium text-[#c9824a]">
               Intentar de nuevo
             </button>
           </div>

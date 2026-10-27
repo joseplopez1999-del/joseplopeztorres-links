@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { useCallback, useState } from 'react';
-import PianoLinks from './components/piano/PianoLinks';
+import StringsLinks from './components/strings/StringsLinks';
 import NewsletterScreen from './components/NewsletterScreen';
 import ProjectScreen from './components/ProjectScreen';
 import ContactScreen from './components/ContactScreen';
@@ -25,8 +25,8 @@ function App() {
   const close = useCallback(() => setModal(null), []);
 
   return (
-    <main className="piano-page">
-      <PianoLinks onAction={setModal} paused={modal !== null} />
+    <main className="harp-page">
+      <StringsLinks onAction={setModal} paused={modal !== null} />
 
       {modal ? (
         <ModalLayer onClose={close}>
