@@ -1,14 +1,16 @@
 # Links OS Project
 
-Una experiencia web interactiva con estética de pantalla de inicio estilo smartphone para centralizar enlaces, proyectos y contenido personal en un solo lugar.
+Una "link in bio" que se toca: un piano donde cada tecla suena y te lleva a uno de mis enlaces.
 
 ## Qué hace este proyecto
 
-`links-os-project` es una landing interactiva construida con React + TypeScript + Vite que simula un sistema operativo móvil:
+`links-os-project` es una landing interactiva construida con React + TypeScript + Vite que convierte la "link in bio" en un piano:
 
-- Home con widgets y apps arrastrables (drag & drop).
-- Navegación entre pantallas internas (`home`, `advent`, `vibe`, `zero2hero`, `onanem`).
-- Dock social con accesos rápidos a perfiles públicos.
+- Home convertida en un piano: cada tecla blanca es un link y suena al tocarla (Web Audio, sin samples).
+- En móvil el teclado va girado 90° (teclas en filas); en escritorio vuelve a estar en horizontal.
+- Primer toque = suena y se selecciona; segundo toque = abre. Deslizar el dedo hace un glissando.
+- Las teclas negras solo suenan. Hay un pentagrama que escribe lo que tocas (y un easter egg si tocas *Para Elisa*).
+- Formularios propios para proyecto, newsletter y contacto.
 - Suscripción a newsletter mediante endpoint seguro (`/api/subscribe`) con validaciones, límite de peticiones y protección básica anti abuso.
 - Integración con Sentry y Vercel Analytics.
 
@@ -101,11 +103,11 @@ Flujo recomendado:
 
 Si quieres reutilizar este proyecto para tu marca personal:
 
-- Cambia enlaces del home en `src/components/HomeScreenGrid.tsx`.
-- Actualiza enlaces del dock en `src/config/socialLinks.ts`.
+- Cambia las teclas/links en `src/config/links.ts` (perfiles en `src/config/socialLinks.ts`).
+- El rango de notas del teclado está en `src/lib/notes.ts` (una tecla blanca por link).
 - Sustituye iconos e imágenes en `public/`.
-- Ajusta textos, nombres y labels en componentes (`LinkWidget`, pantallas de proyectos, etc.).
-- Personaliza estilos y paleta en clases Tailwind.
+- Ajusta textos y cabecera en `src/components/piano/PianoLinks.tsx`.
+- Personaliza estilos y paleta en `src/index.css` (sección *Piano links*).
 
 ## Seguridad y privacidad
 
