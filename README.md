@@ -6,10 +6,9 @@ Una "link in bio" que se toca: el interior de un piano de cola donde cada cuerda
 
 `links-os-project` es una landing interactiva construida con React + TypeScript + Vite que convierte la "link in bio" en las cuerdas de un piano:
 
-- Cada link es una cuerda: graves de cobre entorchado, agudas de acero en grupos de 2 y 3, como en un piano de cola.
-- Arrastrar el dedo agarra la cuerda, la tensa y la suelta; rasgar varias hace un glissando. Un toque en el nombre abre el link.
-- Sonido por síntesis de cuerda pulsada (Karplus-Strong) y vibración visual con la física real de la cuerda, a cámara lenta.
-- Resonancia simpática entre octavas, apagadores de fieltro para silenciar y teclado del ordenador (1–9, espacio).
+- Cada link es una cuerda: graves de cobre entorchado y agudas de acero.
+- Deslizar el dedo rasguea las cuerdas (afinadas en pentatónica, siempre suena bien). Un toque en el nombre abre el link.
+- Sonido sintetizado con Web Audio, sin samples. Botón para silenciar y teclado del ordenador (1–9, espacio).
 - Formularios propios para proyecto, newsletter y contacto.
 - Suscripción a newsletter mediante endpoint seguro (`/api/subscribe`) con validaciones, límite de peticiones y protección básica anti abuso.
 - Integración con Sentry y Vercel Analytics.
@@ -104,9 +103,9 @@ Flujo recomendado:
 Si quieres reutilizar este proyecto para tu marca personal:
 
 - Cambia los links en `src/config/links.ts` (perfiles en `src/config/socialLinks.ts`).
-- Afinación, material y grosor de cada cuerda en `src/components/strings/StringsLinks.tsx` (una cuerda por link).
+- La afinación de cada cuerda está en `PITCHES`, en `src/components/strings/StringsLinks.tsx` (una cuerda por link).
 - Sustituye iconos e imágenes en `public/`.
-- La física del sonido y de la vibración está en `src/lib/stringPhysics.ts` (con tests).
+- El dibujo y la vibración de las cuerdas están en `src/components/strings/harpEngine.ts`; el sonido, en `src/lib/stringAudio.ts`.
 - Personaliza estilos y paleta en `src/index.css` (sección *Cuerdas*).
 
 ## Seguridad y privacidad

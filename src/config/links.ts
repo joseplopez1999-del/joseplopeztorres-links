@@ -11,7 +11,7 @@ export type PianoLink = {
 
 /**
  * Una cuerda por link, de arriba (grave) a abajo (agudo).
- * Si añades o quitas uno, ajusta `STRINGS` en `components/strings/StringsLinks.tsx`.
+ * Si añades o quitas uno, ajusta `PITCHES` en `components/strings/StringsLinks.tsx`.
  */
 export const PIANO_LINKS: PianoLink[] = [
   { id: 'web', label: 'Web', detail: 'joseplopeztorres.com', href: 'https://joseplopeztorres.com' },

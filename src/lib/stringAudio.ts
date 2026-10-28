@@ -1,19 +1,12 @@
-import { renderString, type Excitation } from './stringPhysics';
+/**
+ * Voz de cuerda con Web Audio: unos pocos armónicos con ataque seco,
+ * filtro que se va cerrando y una reverb generada al vuelo.
+ */
 
 type AudioContextCtor = typeof AudioContext;
 
 let ctx: AudioContext | null = null;
 let bus: GainNode | null = null;
-
-function createImpulse(c: AudioContext, seconds: number): AudioBuffer {
-  const length = Math.floor(c.sampleRate * seconds);
-  const impulse = c.createBuffer(2, length, c.sampleRate);
-  for (let channel = 0; channel < 2; channel++) {
-    const data = impulse.getChannelData(channel);
-    for (let i = 0; i < length; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / length) ** 3.2;
-  }
-  return impulse;
-}
 
 function getContext(): AudioContext | null {
   if (ctx) return ctx;
@@ -24,19 +17,24 @@ function getContext(): AudioContext | null {
   ctx = new Ctor();
 
   const compressor = ctx.createDynamicsCompressor();
-  compressor.threshold.value = -18;
-  compressor.ratio.value = 3.5;
+  compressor.threshold.value = -16;
+  compressor.ratio.value = 4;
   compressor.connect(ctx.destination);
 
   bus = ctx.createGain();
-  bus.gain.value = 0.9;
+  bus.gain.value = 0.8;
   bus.connect(compressor);
 
-  // Caja de resonancia: un poco de sala para que no suene a sintetizador seco.
+  const length = Math.floor(ctx.sampleRate * 2.4);
+  const impulse = ctx.createBuffer(2, length, ctx.sampleRate);
+  for (let channel = 0; channel < 2; channel++) {
+    const data = impulse.getChannelData(channel);
+    for (let i = 0; i < length; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / length) ** 3;
+  }
   const reverb = ctx.createConvolver();
-  reverb.buffer = createImpulse(ctx, 2.6);
+  reverb.buffer = impulse;
   const wet = ctx.createGain();
-  wet.gain.value = 0.32;
+  wet.gain.value = 0.3;
   bus.connect(reverb);
   reverb.connect(wet);
   wet.connect(compressor);
@@ -49,63 +47,46 @@ export function unlockAudio(): void {
   if (c && c.state !== 'running') void c.resume();
 }
 
-export type StringSound = {
-  frequency: number;
-  velocity: number;
-  position: number;
-  /** -1 (izquierda) a 1 (derecha). */
-  pan: number;
-  t60: number;
-  excitation?: Excitation;
-  /** Segundos de subida: >0 para la resonancia simpática, que crece en vez de golpear. */
-  swell?: number;
-};
+/** [armónico, ganancia, fracción del sustain] */
+const PARTIALS = [
+  [1, 1, 1],
+  [2, 0.6, 0.8],
+  [3, 0.35, 0.6],
+  [4, 0.2, 0.45],
+  [6, 0.08, 0.3],
+] as const;
 
-export function playString({
-  frequency,
-  velocity,
-  position,
-  pan,
-  t60,
-  excitation = 'pluck',
-  swell = 0,
-}: StringSound): void {
+export function playString(midi: number, velocity: number): void {
   const c = getContext();
   if (!c || !bus) return;
   if (c.state !== 'running') void c.resume();
 
-  const seconds = Math.min(6, t60 + 0.3);
-  const samples = renderString({
-    sampleRate: c.sampleRate,
-    frequency,
-    seconds,
-    position,
-    brightness: Math.min(1, 0.25 + velocity * 0.7),
-    t60,
-    excitation,
-  });
-  const buffer = c.createBuffer(1, samples.length, c.sampleRate);
-  buffer.getChannelData(0).set(samples);
+  const f = 440 * 2 ** ((midi - 69) / 12);
+  const t = c.currentTime + 0.005;
+  const sustain = 3.2 - Math.min(1, Math.max(0, (f - 200) / 600)) * 0.9;
 
-  const source = c.createBufferSource();
-  source.buffer = buffer;
-  const gain = c.createGain();
-  const level = 0.32 * velocity;
-  const t = c.currentTime + 0.003;
-  if (swell > 0) {
-    gain.gain.setValueAtTime(0, t);
-    gain.gain.linearRampToValueAtTime(level, t + swell);
-  } else {
-    gain.gain.value = level;
+  const out = c.createGain();
+  out.gain.value = 0.14 * velocity;
+  const lowpass = c.createBiquadFilter();
+  lowpass.type = 'lowpass';
+  lowpass.frequency.setValueAtTime(Math.min(f * 14, 12000), t);
+  lowpass.frequency.exponentialRampToValueAtTime(Math.max(f * 2.5, 400), t + sustain * 0.6);
+  lowpass.connect(out);
+  out.connect(bus);
+
+  for (const [harmonic, gain, decay] of PARTIALS) {
+    const osc = c.createOscillator();
+    osc.frequency.value = f * harmonic * Math.sqrt(1 + 0.0004 * harmonic * harmonic);
+    osc.detune.value = (Math.random() - 0.5) * 5;
+    const env = c.createGain();
+    const peak = gain * velocity;
+    env.gain.setValueAtTime(0, t);
+    env.gain.linearRampToValueAtTime(peak, t + 0.002);
+    env.gain.exponentialRampToValueAtTime(peak * 0.35, t + 0.08 + 0.15 * decay);
+    env.gain.exponentialRampToValueAtTime(0.0001, t + sustain * decay);
+    osc.connect(env);
+    env.connect(lowpass);
+    osc.start(t);
+    osc.stop(t + sustain * decay + 0.05);
   }
-  source.connect(gain);
-  if (typeof c.createStereoPanner === 'function') {
-    const panner = c.createStereoPanner();
-    panner.pan.value = pan;
-    gain.connect(panner);
-    panner.connect(bus);
-  } else {
-    gain.connect(bus);
-  }
-  source.start(t);
 }
