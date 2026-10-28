@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,13 +6,18 @@
 
 @layer base {
   :root {
-    --background: 30 20% 98%;
-    --foreground: 0 0% 10%;
+    --background: 20 12% 4%;
+    --foreground: 40 45% 93%;
     --card: 0 0% 100%;
     --muted: 30 10% 95%;
-    --primary: 16 100% 62%;
+    --primary: 26 54% 54%;
     --border: 30 15% 88%;
-    --dock-bg: 0 0% 100% / 0.55;
+
+    --lacquer: #0b0806;
+    --ivory: #f3e7d6;
+    --dim: #a8957c;
+    --copper: #c9824a;
+    --steel: #d6dce0;
   }
 
   * {
@@ -20,7 +25,9 @@
   }
 
   body {
-    @apply m-0 font-sans antialiased bg-background text-foreground;
+    @apply m-0 font-sans antialiased;
+    background: var(--lacquer);
+    color: var(--ivory);
   }
 }
 
@@ -28,32 +35,156 @@
   min-height: 100svh;
 }
 
-.dock-glass {
-  background: hsla(var(--dock-bg));
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+/* ───────────────────────── Cuerdas ─────────────────────────
+   Dentro del piano: cada link es una cuerda (graves de cobre, agudas de acero). */
+
+.harp-page {
+  min-height: 100svh;
+  background: radial-gradient(140% 60% at 30% 0%, #2a1c10 0%, var(--lacquer) 60%);
+  color: var(--ivory);
 }
 
-@media (min-width: 768px) {
-  /**
-   * Widget SA (Vibe): cuadrado que no supera el ancho de 2 columnas ni la altura filas 3–4 + gap (15px).
-   * `--desktop-app-row-height` la define el grid en `HomeScreenGrid` (misma expresión que `CSS_DESKTOP_HOME_APP_ROW_HEIGHT`).
-   */
-  .link-widget-vibe-square {
-    width: var(
-      --desktop-vibe-square-max,
-      min(100%, calc(2 * (74px * 0.81 + 0.5rem + 12px) + 15px))
-    );
-    aspect-ratio: 1;
-    height: auto;
-  }
+.harp-app {
+  margin: 0 auto;
+  display: flex;
+  height: 100svh;
+  max-width: 640px;
+  flex-direction: column;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
+  font-family: 'Manrope', system-ui, sans-serif;
+}
 
-  .link-widget-vibe-caption {
-    width: var(
-      --desktop-vibe-square-max,
-      min(100%, calc(2 * (74px * 0.81 + 0.5rem + 12px) + 15px))
-    );
-    text-align: center;
+.harp-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 22px 20px 10px;
+}
+
+.harp-head-text {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  gap: 4px;
+}
+
+.harp-head small {
+  font: 500 11px/1 'JetBrains Mono', ui-monospace, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.harp-head h1 {
+  margin: 0;
+  font: italic 300 34px/1 'Fraunces', Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+.harp-head p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--dim);
+}
+
+.harp-mute {
+  display: inline-flex;
+  height: 36px;
+  width: 36px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(243, 231, 214, 0.14);
+  background: rgba(243, 231, 214, 0.04);
+  color: var(--ivory);
+  cursor: pointer;
+}
+
+.harp-mute[aria-pressed='true'] {
+  color: var(--dim);
+}
+
+.harp-mute:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 2px;
+}
+
+.harp-board {
+  position: relative;
+  margin-top: 6px;
+  min-height: 0;
+  flex: 1 1 0;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.harp-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.harp-rows {
+  position: absolute;
+  inset: 0 0 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.harp-row {
+  display: flex;
+  min-height: 0;
+  flex: 1 1 0;
+  align-items: baseline;
+  gap: 10px;
+  border: 0;
+  background: none;
+  padding: 4px 22px 0 44px;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+.harp-row:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: -4px;
+  border-radius: 8px;
+}
+
+.harp-name {
+  flex-shrink: 0;
+  font: 500 19px/1.1 'Fraunces', Georgia, serif;
+}
+
+.harp-detail {
+  min-width: 0;
+  margin-left: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11.5px;
+  color: var(--dim);
+}
+
+.harp-arrow {
+  font: 400 14px/1 'JetBrains Mono', ui-monospace, monospace;
+  color: var(--dim);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .harp-row:hover .harp-arrow {
+    color: var(--copper);
   }
 }
 

@@ -94,7 +94,7 @@ export default function ProjectScreen({ onClose }: Props) {
       className="absolute inset-0 z-[150] flex items-end justify-center rounded-[34px] bg-black/60 backdrop-blur-md"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="max-h-[90%] w-full overflow-y-auto rounded-t-[32px] bg-gradient-to-b from-[#13131f] to-[#0a0a0f] px-6 pb-10 pt-5 shadow-[0_-8px_48px_rgba(0,0,0,0.7)]">
+      <div className="max-h-[90%] w-full overflow-y-auto rounded-t-[32px] bg-gradient-to-b from-[#1c140d] to-[#0b0806] px-6 pb-10 pt-5 shadow-[0_-8px_48px_rgba(0,0,0,0.7)]">
         <div className="mb-5 flex items-center justify-between">
           <div className="h-1 w-10 rounded-full bg-white/20" />
           <button
@@ -111,7 +111,7 @@ export default function ProjectScreen({ onClose }: Props) {
 
         {step === 'form' && (
           <>
-            <p className="mb-1 font-sans text-[10px] font-semibold uppercase tracking-widest text-[#a78bfa]/60">
+            <p className="mb-1 font-sans text-[10px] font-semibold uppercase tracking-widest text-[#c9824a]/60">
               Nuevo proyecto
             </p>
             <h2 className="mb-1 font-sans text-xl font-bold text-white">¿Cuándo empezamos?</h2>
@@ -128,7 +128,7 @@ export default function ProjectScreen({ onClose }: Props) {
                 placeholder="Tu nombre"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#a78bfa]/60 focus:bg-white/[0.07]"
+                className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#c9824a]/60 focus:bg-white/[0.07]"
               />
               <input
                 type="text"
@@ -136,7 +136,7 @@ export default function ProjectScreen({ onClose }: Props) {
                 placeholder="Email o WhatsApp"
                 value={contact}
                 onChange={(e) => setContact(e.target.value)}
-                className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#a78bfa]/60 focus:bg-white/[0.07]"
+                className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#c9824a]/60 focus:bg-white/[0.07]"
               />
 
               {/* Servicios por grupo */}
@@ -146,7 +146,7 @@ export default function ProjectScreen({ onClose }: Props) {
                 </label>
                 {SERVICE_GROUPS.map((group) => (
                   <div key={group.label}>
-                    <p className="mb-1.5 font-sans text-[10px] font-semibold uppercase tracking-widest text-[#a78bfa]/40">
+                    <p className="mb-1.5 font-sans text-[10px] font-semibold uppercase tracking-widest text-[#c9824a]/40">
                       {group.label}
                     </p>
                     <div className="flex flex-wrap gap-1.5">
@@ -157,8 +157,8 @@ export default function ProjectScreen({ onClose }: Props) {
                           onClick={() => setService(opt)}
                           className={`rounded-full px-3 py-1.5 font-sans text-xs font-medium transition-colors ${
                             service === opt
-                              ? 'bg-[#a78bfa] text-[#0d0d14]'
-                              : 'border border-white/10 bg-white/5 text-white/60 hover:border-[#a78bfa]/40'
+                              ? 'bg-[#c9824a] text-[#120c07]'
+                              : 'border border-white/10 bg-white/5 text-white/60 hover:border-[#c9824a]/40'
                           }`}
                         >
                           {opt}
@@ -189,7 +189,7 @@ export default function ProjectScreen({ onClose }: Props) {
                     placeholder="Descríbelo en pocas palabras..."
                     value={customService}
                     onChange={(e) => setCustomService(e.target.value)}
-                    className="w-full rounded-xl border border-[#a78bfa]/30 bg-white/5 px-4 py-3 font-sans text-sm text-white placeholder-white/30 outline-none focus:border-[#a78bfa]/50"
+                    className="w-full rounded-xl border border-[#c9824a]/30 bg-white/5 px-4 py-3 font-sans text-sm text-white placeholder-white/30 outline-none focus:border-[#c9824a]/50"
                     autoFocus
                   />
                 )}
@@ -208,8 +208,8 @@ export default function ProjectScreen({ onClose }: Props) {
                       onClick={() => setWantsAudit(val)}
                       className={`rounded-full px-4 py-1.5 font-sans text-xs font-medium capitalize transition-colors ${
                         wantsAudit === val
-                          ? 'bg-[#a78bfa] text-[#0d0d14]'
-                          : 'border border-white/10 bg-white/5 text-white/60 hover:border-[#a78bfa]/40'
+                          ? 'bg-[#c9824a] text-[#120c07]'
+                          : 'border border-white/10 bg-white/5 text-white/60 hover:border-[#c9824a]/40'
                       }`}
                     >
                       {val === 'si' ? 'Sí' : 'No'}
@@ -228,7 +228,7 @@ export default function ProjectScreen({ onClose }: Props) {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   rows={3}
-                  className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 font-sans text-sm text-white placeholder-white/30 outline-none focus:border-[#a78bfa]/50"
+                  className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 font-sans text-sm text-white placeholder-white/30 outline-none focus:border-[#c9824a]/50"
                 />
               </div>
 
@@ -242,7 +242,7 @@ export default function ProjectScreen({ onClose }: Props) {
                   placeholder="Emprendedor, clínica, tienda online..."
                   value={occupation}
                   onChange={(e) => setOccupation(e.target.value)}
-                  className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#a78bfa]/60 focus:bg-white/[0.07]"
+                  className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#c9824a]/60 focus:bg-white/[0.07]"
                 />
               </div>
               <div>
@@ -254,14 +254,14 @@ export default function ProjectScreen({ onClose }: Props) {
                   placeholder="Instagram @tutienda, TikTok, LinkedIn..."
                   value={socialAccounts}
                   onChange={(e) => setSocialAccounts(e.target.value)}
-                  className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#a78bfa]/60 focus:bg-white/[0.07]"
+                  className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.04] px-4 py-3 font-sans text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 focus:border-[#c9824a]/60 focus:bg-white/[0.07]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading || !name || !contact}
-                className="w-full rounded-2xl bg-[#a78bfa] py-3 font-sans text-sm font-semibold text-[#0d0d14] shadow-[0_0_24px_rgba(167,139,250,0.35)] transition-all duration-200 hover:shadow-[0_0_32px_rgba(167,139,250,0.55)] active:scale-[0.98] disabled:opacity-40 disabled:shadow-none"
+                className="w-full rounded-2xl bg-[#c9824a] py-3 font-sans text-sm font-semibold text-[#120c07] shadow-[0_0_24px_rgba(201,130,74,0.35)] transition-all duration-200 hover:shadow-[0_0_32px_rgba(201,130,74,0.55)] active:scale-[0.98] disabled:opacity-40 disabled:shadow-none"
               >
                 {loading ? 'Enviando...' : 'Enviar'}
               </button>
@@ -277,7 +277,7 @@ export default function ProjectScreen({ onClose }: Props) {
               Te respondo en menos de 24 horas.
             </p>
             <button type="button" onClick={onClose}
-              className="font-sans text-sm font-medium text-[#a78bfa]">
+              className="font-sans text-sm font-medium text-[#c9824a]">
               Cerrar
             </button>
           </div>
@@ -289,7 +289,7 @@ export default function ProjectScreen({ onClose }: Props) {
             <h2 className="mb-1 font-sans text-xl font-bold text-white">Algo falló.</h2>
             <p className="mb-4 font-sans text-xs text-white/40">{errorMsg}</p>
             <button type="button" onClick={() => setStep('form')}
-              className="font-sans text-sm font-medium text-[#a78bfa]">
+              className="font-sans text-sm font-medium text-[#c9824a]">
               Intentar de nuevo
             </button>
           </div>

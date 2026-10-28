@@ -1,14 +1,15 @@
 # Links OS Project
 
-Una experiencia web interactiva con estética de pantalla de inicio estilo smartphone para centralizar enlaces, proyectos y contenido personal en un solo lugar.
+Una "link in bio" que se toca: el interior de un piano de cola donde cada cuerda es uno de mis enlaces.
 
 ## Qué hace este proyecto
 
-`links-os-project` es una landing interactiva construida con React + TypeScript + Vite que simula un sistema operativo móvil:
+`links-os-project` es una landing interactiva construida con React + TypeScript + Vite que convierte la "link in bio" en las cuerdas de un piano:
 
-- Home con widgets y apps arrastrables (drag & drop).
-- Navegación entre pantallas internas (`home`, `advent`, `vibe`, `zero2hero`, `onanem`).
-- Dock social con accesos rápidos a perfiles públicos.
+- Cada link es una cuerda: graves de cobre entorchado y agudas de acero.
+- Deslizar el dedo rasguea las cuerdas (afinadas en pentatónica, siempre suena bien). Un toque en el nombre abre el link.
+- Sonido sintetizado con Web Audio, sin samples. Botón para silenciar y teclado del ordenador (1–9, espacio).
+- Formularios propios para proyecto, newsletter y contacto.
 - Suscripción a newsletter mediante endpoint seguro (`/api/subscribe`) con validaciones, límite de peticiones y protección básica anti abuso.
 - Integración con Sentry y Vercel Analytics.
 
@@ -101,11 +102,11 @@ Flujo recomendado:
 
 Si quieres reutilizar este proyecto para tu marca personal:
 
-- Cambia enlaces del home en `src/components/HomeScreenGrid.tsx`.
-- Actualiza enlaces del dock en `src/config/socialLinks.ts`.
+- Cambia los links en `src/config/links.ts` (perfiles en `src/config/socialLinks.ts`).
+- La afinación de cada cuerda está en `PITCHES`, en `src/components/strings/StringsLinks.tsx` (una cuerda por link).
 - Sustituye iconos e imágenes en `public/`.
-- Ajusta textos, nombres y labels en componentes (`LinkWidget`, pantallas de proyectos, etc.).
-- Personaliza estilos y paleta en clases Tailwind.
+- El dibujo y la vibración de las cuerdas están en `src/components/strings/harpEngine.ts`; el sonido, en `src/lib/stringAudio.ts`.
+- Personaliza estilos y paleta en `src/index.css` (sección *Cuerdas*).
 
 ## Seguridad y privacidad
 
